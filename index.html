@@ -33,7 +33,7 @@
             }
             th.choicesCol {
                 box-sizing: border-box;
-                width: 125px;
+                width: 105px;
             }
             th + th {
                 border-left: none;
@@ -515,10 +515,10 @@
             <h1>Kink list</h1>
             <div class="legend">
                 <div><span data-color="#FFFFFF" class="choice notEntered"></span> <span class="legend-text">Not Entered</span></div>
-                <div><span data-color="#6DB5FE" class="choice favorite"></span> <span class="legend-text">Favorite</span></div>
-                <div><span data-color="#23FD22" class="choice like"></span> <span class="legend-text">Like</span></div>
-                <div><span data-color="#FDFD6B" class="choice okay"></span> <span class="legend-text">Okay</span></div>
-                <div><span data-color="#DB6C00" class="choice maybe"></span> <span class="legend-text">Maybe</span></div>
+                <div><span data-color="#6DB5FE" class="choice favorite"></span> <span class="legend-text">Fave</span></div>
+                <div><span data-color="#23FD22" class="choice like"></span> <span class="legend-text">Yes</span></div>
+                <!--<div><span data-color="#FDFD6B" class="choice okay"></span> <span class="legend-text">Okay</span></div>-->
+                <div><span data-color="#ef9e00" class="choice maybe"></span> <span class="legend-text">Maybe</span></div>
                 <div><span data-color="#920000" class="choice no"></span> <span class="legend-text">No</span></div>
             </div>
             <div id="ExportWrapper">
@@ -531,41 +531,56 @@
         </div>
         <div id="EditOverlay" class="overlay">
             <textarea id="Kinks">
-#Bodies
+#Info
 (General)
-* Skinny
-* Chubby
-* Small breasts
-* Large breasts
-* Small cocks
-* Large cocks
+* I am Male!
+* I am Female!
+* I am Dominant!
+* I am Submissive!
+* Non Consensual!
+* Ping Me every Response!
+* Literacy
+* ERP Willingness
+* RP Willingness
+* Public RP Rooms
+* Private Rooms
+* PMs
+
+#Gender
+(General)
+* Males
+* Females
+* Transgender
+* Hermaphrodites
+* Shemales
+* Cuntboys
+
+#Species
+(General)
+* Humans
+* Kemonomimi (Catgirls/-boys)
+* Demons
+* Angels
+* Monsters
+* Furries
+* Animals / Feralspp
+* Tentacles
 
 #Clothing
-(Self, Partner)
+(General)
 * Clothed sex
 * Lingerie
-* Stockings
+* Thigh Highs / Stockings
 * Heels
 * Leather
 * Latex
-* Uniform / costume
+* Uniform / Costume
 * Cross-dressing
 
-#Groupings
-(General)
-* You and 1 male
-* You and 1 female
-* You and MtF trans
-* You and FtM trans
-* You and 1 male, 1 female
-* You and 2 males
-* You and 2 females
-* Orgy
-
-#General
+#Sex
 (Giving, Receiving)
 * Romance / Affection
-* Handjob / fingering
+* Handjob / Fingering
 * Blowjob
 * Deep throat
 * Swallowing
@@ -574,28 +589,36 @@
 * Face-sitting
 * Edging
 * Teasing
-* JOI, SI
 
-#Ass play
+#Anal
 (Giving, Receiving)
-* Anal toys
-* Anal sex, pegging
+* Anal Sex, Pegging
 * Rimming
-* Double penetration
-* Anal fisting
+* Fingering
+* Anal Fisting
+* Anal Toys
+
+#Vaginal
+(Giving, Receiving)
+* Vaginal Sex
+* Licking
+* Fingering
+* Vaginal Fisting
+* Scissoring
 
 #Restrictive
-(Self, Partner)
+(General)
 * Gag
 * Collar
 * Leash
+* Cuffs
 * Chastity
 * Bondage (Light)
 * Bondage (Heavy)
-* Encasement
+* Caging
 
 #Toys
-(Self, Partner)
+(General)
 * Dildos
 * Plugs
 * Vibrators
@@ -604,9 +627,9 @@
 #Domination
 (Dominant, Submissive)
 * Dominant / Submissive
-* Domestic servitude
+* Domestic Servitude
 * Slavery
-* Pet play
+* Pet Play
 * DD/lg, MD/lb
 * Discipline
 * Begging
@@ -615,13 +638,13 @@
 * Orgasm denial
 * Power exchange
 
-#No consent
+#Non Consensual
 (Aggressor, Target)
-* Non-con / rape
-* Blackmail / coercion
+* Non-Con / Rape
+* Blackmail / Coercion
 * Kidnapping
-* Drugs / alcohol
-* Sleep play
+* Drugs / Alcohol
+* Sleep Play
 
 #Taboo
 (General)
@@ -634,15 +657,6 @@
 * Exhibitionism
 * Voyeurism
 
-#Surrealism
-(Self, Partner)
-* Futanari
-* Furry
-* Vore
-* Transformation
-* Tentacles
-* Monster or Alien
-
 #Fluids
 (General)
 * Blood
@@ -653,13 +667,13 @@
 * Cum play
 
 #Degradation
-(Giving, Receiving)
+(General)
 * Glory hole
 * Name calling
 * Humiliation
 
 #Touch & Stimulation
-(Actor, Subject)
+(General)
 * Cock/Pussy worship
 * Ass worship
 * Foot play
@@ -668,7 +682,7 @@
 * Electro stimulation
 
 #Misc. Fetish
-(Giving, Receiving)
+(General)
 * Fisting
 * Gangbang
 * Breath play
@@ -678,7 +692,7 @@
 * Cuckold / Cuckquean
 
 #Pain
-(Giving, Receiving)
+(General)
 * Light pain
 * Heavy pain
 * Nipple clamps
@@ -692,7 +706,7 @@
 * Hot Wax
 * Scratching
 * Biting
-* Cutting                
+* Cutting
             </textarea>
             <button id="KinksOK">Accept</button>
         </div>
@@ -770,10 +784,11 @@
                         
                         return $category;
                     },
-                    createChoice: function(){
+                    createChoice: function(mode = 0){
                         var $container = $('<div>').addClass('choices');
                         var levels = Object.keys(level);
                         for(var i = 0; i < levels.length; i++) {
+							if (mode == 0 || (mode == 1 && i != 0 && i != 1 && i != 3)) {
                             $('<button>')
                                     .addClass('choice')
                                     .addClass(level[levels[i]])
@@ -785,13 +800,20 @@
                                         $container.find('button').removeClass('selected');
                                         $(this).addClass('selected');
                                     });
+							}
                         }
                         return $container;
                     },
                     createKink: function(fields, name){
                         var $row = $('<tr>').data('kink', name).addClass('kinkRow');
                         for(var i = 0; i < fields.length; i++) {
-                            var $choices = inputKinks.createChoice();
+							console.log(name);
+							var $choices;
+							if (name.includes("!")){
+								$choices = inputKinks.createChoice(1);
+							} else {
+								$choices = inputKinks.createChoice(0);
+							};
                             $choices.data('field', fields[i]);
                             $choices.addClass('choice-' + strToClass(fields[i]));
                             $('<td>').append($choices).appendTo($row);

@@ -784,11 +784,11 @@
                         
                         return $category;
                     },
-                    createChoice: function(mode = 0){
+                    createChoice: function(){
                         var $container = $('<div>').addClass('choices');
                         var levels = Object.keys(level);
                         for(var i = 0; i < levels.length; i++) {
-							if (mode == 0 || (mode == 1 && i != 0 && i != 1 && i != 3)) {
+
                             $('<button>')
                                     .addClass('choice')
                                     .addClass(level[levels[i]])
@@ -801,19 +801,12 @@
                                         $(this).addClass('selected');
                                     });
 							}
-                        }
                         return $container;
                     },
                     createKink: function(fields, name){
                         var $row = $('<tr>').data('kink', name).addClass('kinkRow');
                         for(var i = 0; i < fields.length; i++) {
-							console.log(name);
-							var $choices;
-							if (name.includes("!")){
-								$choices = inputKinks.createChoice(1);
-							} else {
-								$choices = inputKinks.createChoice(0);
-							};
+			var $choices = inputKinks.createChoice();
                             $choices.data('field', fields[i]);
                             $choices.addClass('choice-' + strToClass(fields[i]));
                             $('<td>').append($choices).appendTo($row);
